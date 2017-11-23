@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/admin/index.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "indexAction",
+        "json",
+        "a"
+    ],
+    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AAC9CC,gBAAc;AACZ,SAAKC,IAAL,CAAU,EAAEC,GAAG,CAAL,EAAV;AACD;AAH6C,CAAhD",
+    "file": "../../../src/controller/admin/index.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Controller {\n  indexAction() {\n    this.json({ a: 2 });\n  }\n};"
+    ]
+}
