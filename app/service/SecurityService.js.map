@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/service/SecurityService.js"
+    ],
+    "names": [
+        "UserEntity",
+        "require",
+        "module",
+        "exports",
+        "getUser",
+        "_t",
+        "_q"
+    ],
+    "mappings": "AAAA,MAAMA,aAAaC,QAAQ,gBAAR,CAAnB;;AAEAC,OAAOC,OAAP,GAAiB,MAAM;;AAErB,SAAOC,OAAP,CAAe,EAAEC,EAAF,EAAMC,EAAN,KAAa,EAA5B,EAAgC;AAC9B,QAAI,CAACD,EAAD,IAAO,CAACC,EAAZ,EAAgB;AACd,aAAO,IAAIN,UAAJ,EAAP;AACD,KAFD,MAEO;AACL,aAAO,IAAIA,UAAJ,CAAe,EAAEK,EAAF,EAAMC,EAAN,EAAf,CAAP;AACD;AACF;AARoB,CAAvB",
+    "file": "../../src/service/SecurityService.js",
+    "sourcesContent": [
+        "const UserEntity = require('../entity/User');\n\nmodule.exports = class {\n\n  static getUser({ _t, _q } = {}) {\n    if (!_t || !_q) {\n      return new UserEntity();\n    } else {\n      return new UserEntity({ _t, _q });\n    }\n  }\n}"
+    ]
+}

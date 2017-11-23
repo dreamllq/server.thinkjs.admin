@@ -1,0 +1,42 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/entity/User.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "constructor",
+        "payload",
+        "username",
+        "password",
+        "_t",
+        "_q",
+        "id",
+        "email",
+        "phone",
+        "login",
+        "user",
+        "think",
+        "model",
+        "result",
+        "where",
+        "find",
+        "console",
+        "log",
+        "isEmpty",
+        "key",
+        "cache",
+        "toJSON",
+        "logout",
+        "hasRoal",
+        "isPermitted",
+        "getPermissions",
+        "getInfo"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,MAAM;AACrBC,cAAYC,UAAU,EAAtB,EAA0B;AACxB,SAAKC,QAAL,GAAgB,EAAhB;AACA,SAAKC,QAAL,GAAgB,EAAhB;AACA,SAAKC,EAAL,GAAUH,QAAQG,EAAR,IAAc,EAAxB;AACA,SAAKC,EAAL,GAAUJ,QAAQI,EAAR,IAAc,EAAxB;AACA,SAAKC,EAAL,GAAU,EAAV;AACA,SAAKC,KAAL,GAAa,EAAb;AACA,SAAKC,KAAL,GAAa,EAAb;AACD;;AAEKC,OAAN,CAAY,EAAEP,WAAW,EAAb,EAAiBC,WAAW,EAA5B,KAAmC,EAA/C,EAAmD;AAAA;;AAAA;AACjD,UAAIO,OAAOC,MAAMC,KAAN,CAAY,MAAZ,CAAX;AACA,UAAIC,SAAS,MAAMH,KAAKI,KAAL,CAAW,EAAEZ,QAAF,EAAYC,QAAZ,EAAX,EAAmCY,IAAnC,EAAnB;AACAC,cAAQC,GAAR,CAAYJ,MAAZ;AACA,UAAIF,MAAMO,OAAN,CAAcL,MAAd,CAAJ,EAA2B;AACzB,eAAO,IAAP;AACD;;AAED,YAAKX,QAAL,GAAgBW,OAAOX,QAAvB;AACA,YAAKC,QAAL,GAAgBU,OAAOV,QAAvB;AACA,YAAKG,EAAL,GAAUO,OAAOP,EAAjB;AACA,YAAKC,KAAL,GAAaM,OAAON,KAApB;AACA,YAAKC,KAAL,GAAaK,OAAOL,KAApB;;AAEA,UAAIW,MAAO,MAAK,MAAKb,EAAG,EAAxB;AACA,YAAKD,EAAL,GAAUc,GAAV;AACA,YAAKf,EAAL,GAAUe,GAAV;AACA,YAAMR,MAAMS,KAAN,CAAYD,GAAZ,EAAiB,MAAKE,MAAL,EAAjB,CAAN;AACA,aAAO;AACLjB,YAAI,MAAKA,EADJ;AAELC,YAAI,MAAKA;AAFJ,OAAP;AAlBiD;AAsBlD;;AAGDiB,WAAS,CAER;;AAEDC,YAAU,CAET;;AAEDC,gBAAc,CAEb;;AAEDC,mBAAiB,CAEhB;;AAEKC,SAAN,GAAgB;AAAA;;AAAA;AACd,UAAIP,MAAM,OAAKf,EAAf;AACA,UAAIS,SAAS,MAAMF,MAAMS,KAAN,CAAYD,GAAZ,CAAnB;AACA,UAAGN,UAAU,CAACF,MAAMO,OAAN,CAAcL,MAAd,CAAd,EAAoC;AAClC,eAAKX,QAAL,GAAgBW,OAAOX,QAAvB;AACA,eAAKC,QAAL,GAAgBU,OAAOV,QAAvB;AACA,eAAKG,EAAL,GAAUO,OAAOP,EAAjB;AACA,eAAKC,KAAL,GAAaM,OAAON,KAApB;AACA,eAAKC,KAAL,GAAaK,OAAOL,KAApB;AACA,eAAO,OAAKa,MAAL,EAAP;AACD,OAPD,MAOO;AACL,eAAO,EAAP;AACD;AAZa;AAcf;;AAEDA,WAAS;AACP,WAAO;AACLf,UAAI,KAAKA,EADJ;AAELJ,gBAAU,KAAKA,QAFV;AAGLC,gBAAU,KAAKA,QAHV;AAILI,aAAO,KAAKA,KAJP;AAKLC,aAAO,KAAKA;AALP,KAAP;AAOD;AA5EoB,CAAvB",
+    "file": "../../src/entity/User.js",
+    "sourcesContent": [
+        "module.exports = class {\n  constructor(payload = {}) {\n    this.username = '';\n    this.password = '';\n    this._t = payload._t || '';\n    this._q = payload._q || '';\n    this.id = '';\n    this.email = '';\n    this.phone = '';\n  }\n\n  async login({ username = '', password = '' } = {}) {\n    let user = think.model('user');\n    let result = await user.where({ username, password }).find();\n    console.log(result);\n    if (think.isEmpty(result)) {\n      return null;\n    }\n\n    this.username = result.username;\n    this.password = result.password;\n    this.id = result.id;\n    this.email = result.email;\n    this.phone = result.phone;\n\n    let key = `u##${this.id}`;\n    this._q = key;\n    this._t = key;\n    await think.cache(key, this.toJSON());\n    return {\n      _t: this._t,\n      _q: this._q\n    }\n  }\n\n\n  logout() {\n\n  }\n\n  hasRoal() {\n\n  }\n\n  isPermitted() {\n\n  }\n\n  getPermissions() {\n\n  }\n\n  async getInfo() {\n    let key = this._t;\n    let result = await think.cache(key);\n    if(result && !think.isEmpty(result)){\n      this.username = result.username;\n      this.password = result.password;\n      this.id = result.id;\n      this.email = result.email;\n      this.phone = result.phone;\n      return this.toJSON();\n    } else {\n      return {};\n    }\n    \n  }\n\n  toJSON() {\n    return {\n      id: this.id,\n      username: this.username,\n      password: this.password,\n      email: this.email,\n      phone: this.phone\n    }\n  }\n}"
+    ]
+}

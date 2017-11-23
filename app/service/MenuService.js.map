@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/service/MenuService.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "getMenu",
+        "permissions",
+        "Error"
+    ],
+    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,MAAM;AACrB,SAAOC,OAAP,CAAeC,cAAc,IAA7B,EAAmC;AACjC,QAAI,CAACA,WAAL,EAAkB;AAChB,YAAM,IAAIC,KAAJ,CAAU,uBAAV,CAAN;AACD;;AAED,WAAO,EAAP;AACD;AAPoB,CAAvB",
+    "file": "../../src/service/MenuService.js",
+    "sourcesContent": [
+        "module.exports = class {\n  static getMenu(permissions = null) {\n    if (!permissions) {\n      throw new Error('permissions not exist')\n    }\n\n    return [];\n  }\n}"
+    ]
+}

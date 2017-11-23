@@ -1,0 +1,43 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/admin/user.js"
+    ],
+    "names": [
+        "SecurityService",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "getAction",
+        "_q",
+        "cookie",
+        "_t",
+        "fail",
+        "currentUser",
+        "getUser",
+        "info",
+        "getInfo",
+        "isEmpty",
+        "success",
+        "updateAction",
+        "a",
+        "loginAction",
+        "username",
+        "password",
+        "body",
+        "result",
+        "login",
+        "domain",
+        "path",
+        "maxAge",
+        "httpOnly",
+        "logoutAction"
+    ],
+    "mappings": ";;AAAA,MAAMA,kBAAkBC,QAAQ,+BAAR,CAAxB;;AAEAC,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACxCC,WAAN,GAAkB;AAAA;;AAAA;AAChB,UAAIC,KAAK,MAAKC,MAAL,CAAY,IAAZ,CAAT;AACA,UAAIC,KAAK,MAAKD,MAAL,CAAY,IAAZ,CAAT;;AAEA,UAAI,CAACD,EAAD,IAAO,CAACE,EAAZ,EAAgB;AACd,cAAKC,IAAL,CAAU,IAAV,EAAgB,KAAhB;AACD,OAFD,MAEO;AACL,YAAIC,cAAcX,gBAAgBY,OAAhB,CAAwB,EAAEL,EAAF,EAAME,EAAN,EAAxB,CAAlB;AACA,YAAII,OAAO,MAAMF,YAAYG,OAAZ,EAAjB;AACA,YAAIV,MAAMW,OAAN,CAAcF,IAAd,CAAJ,EAAyB;AACvB,gBAAKH,IAAL,CAAU,IAAV,EAAgB,KAAhB;AACD,SAFD,MAEO;AACL,gBAAKM,OAAL,CAAaH,IAAb;AACD;AACF;AAde;AAejB;;AAEDI,iBAAe;AACb,SAAKD,OAAL,CAAa,EAAEE,GAAG,SAAL,EAAb;AACD;;AAEKC,aAAN,GAAoB;AAAA;;AAAA;AAClB,UAAI,EAAEC,QAAF,EAAYC,QAAZ,KAAyB,OAAKC,IAAL,IAAa,EAAEF,UAAU,OAAZ,EAAqBC,UAAU,QAA/B,EAA1C;AACA,UAAIV,cAAcX,gBAAgBY,OAAhB,EAAlB;AACA,UAAIW,SAAS,MAAMZ,YAAYa,KAAZ,CAAkB,EAAEJ,QAAF,EAAYC,QAAZ,EAAlB,CAAnB;AACA,UAAI,CAACE,MAAL,EAAa;AACX,eAAKb,IAAL,CAAU,IAAV,EAAgB,MAAhB;AACD,OAFD,MAEO;AACL,eAAKF,MAAL,CAAY,IAAZ,EAAkBe,OAAOd,EAAzB,EAA6B;AAC3BgB,kBAAQ,EADmB;AAE3BC,gBAAM,GAFqB;AAG3BC,kBAAQ,KAAK,IAAL,GAAY,IAHO;AAI3BC,oBAAU;AAJiB,SAA7B;AAMA,eAAKpB,MAAL,CAAY,IAAZ,EAAkBe,OAAOhB,EAAzB,EAA6B;AAC3BkB,kBAAQ,EADmB;AAE3BC,gBAAM,GAFqB;AAG3BC,kBAAQ,KAAK,IAAL,GAAY,IAHO;AAI3BC,oBAAU;AAJiB,SAA7B;AAMA,eAAKZ,OAAL;AACD;AApBiB;AAqBnB;;AAEDa,iBAAe,CAEd;AA/C6C,CAAhD",
+    "file": "../../../src/controller/admin/user.js",
+    "sourcesContent": [
+        "const SecurityService = require('../../service/SecurityService');\n\nmodule.exports = class extends think.Controller {\n  async getAction() {\n    let _q = this.cookie(\"_q\");\n    let _t = this.cookie(\"_t\");\n\n    if (!_q || !_t) {\n      this.fail(5002, '未登陆');\n    } else {\n      let currentUser = SecurityService.getUser({ _q, _t });\n      let info = await currentUser.getInfo();\n      if (think.isEmpty(info)) {\n        this.fail(5002, '未登陆');\n      } else {\n        this.success(info);\n      }\n    }\n  }\n\n  updateAction() {\n    this.success({ a: 'laskdjf' });\n  }\n\n  async loginAction() {\n    let { username, password } = this.body || { username: 'admin', password: '123456' };\n    let currentUser = SecurityService.getUser();\n    let result = await currentUser.login({ username, password });\n    if (!result) {\n      this.fail(5001, '登陆失败');\n    } else {\n      this.cookie('_t', result._t, {\n        domain: '',\n        path: '/',\n        maxAge: 24 * 3600 * 1000,\n        httpOnly: false\n      });\n      this.cookie('_q', result._q, {\n        domain: '',\n        path: '/',\n        maxAge: 24 * 3600 * 1000,\n        httpOnly: false\n      })\n      this.success();\n    }\n  }\n\n  logoutAction() {\n\n  }\n};"
+    ]
+}

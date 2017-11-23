@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/controller/admin/menu/get.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "aaaAction",
+        "success",
+        "a"
+    ],
+    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AAC9CC,cAAY;AACV,SAAKC,OAAL,CAAa,EAAEC,GAAG,SAAL,EAAb;AACD;AAH6C,CAAhD",
+    "file": "../../../../src/controller/admin/menu/get.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Controller {\n  aaaAction() {\n    this.success({ a: 'asdfasd' });\n  }\n};"
+    ]
+}

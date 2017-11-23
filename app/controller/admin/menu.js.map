@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/admin/menu.js"
+    ],
+    "names": [
+        "SecurityService",
+        "require",
+        "MenuService",
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "getAction",
+        "currentUser",
+        "getUser",
+        "permissions",
+        "getPermissions",
+        "menu",
+        "getMenu",
+        "success"
+    ],
+    "mappings": "AAAA,MAAMA,kBAAoBC,QAAQ,+BAAR,CAA1B;AACA,MAAMC,cAAcD,QAAQ,2BAAR,CAApB;;AAEAE,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AAC9CC,cAAY;AACV;AACA,QAAIC,cAAcR,gBAAgBS,OAAhB,EAAlB;AACA,QAAIC,cAAcF,YAAYG,cAAZ,EAAlB;AACA,QAAIC,OAAOV,YAAYW,OAAZ,CAAoBH,WAApB,CAAX;AACA,SAAKI,OAAL,CAAaF,IAAb;AACD;AAP6C,CAAhD",
+    "file": "../../../src/controller/admin/menu.js",
+    "sourcesContent": [
+        "const SecurityService  =  require('../../service/SecurityService');\nconst MenuService = require('../../service/MenuService');\n\nmodule.exports = class extends think.Controller {\n  getAction() {\n    // this.success({ a: 'laskdjf' });\n    let currentUser = SecurityService.getUser();\n    let permissions = currentUser.getPermissions();\n    let menu = MenuService.getMenu(permissions);\n    this.success(menu);\n  }\n};"
+    ]
+}

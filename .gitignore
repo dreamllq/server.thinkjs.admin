@@ -58,3 +58,4 @@ typings/
 .env
 
 sql_version/exec.js
+runtime/cache
