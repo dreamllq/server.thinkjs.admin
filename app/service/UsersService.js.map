@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/service/UsersService.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "userAdd",
+        "username",
+        "password",
+        "email",
+        "phone",
+        "user",
+        "think",
+        "model",
+        "add",
+        "gets",
+        "offset",
+        "limit",
+        "items",
+        "select",
+        "total",
+        "count",
+        "get",
+        "id",
+        "where",
+        "find",
+        "isEmpty",
+        "update",
+        "params",
+        "delete",
+        "resetPassword"
+    ],
+    "mappings": ";;;;AAAAA,OAAOC,OAAP,GAAiB,MAAM;AACrB,SAAaC,OAAb,CAAqB,EAAEC,QAAF,EAAYC,QAAZ,EAAsBC,KAAtB,EAA6BC,KAA7B,EAArB,EAA2D;AAAA;AACzD,UAAIC,OAAOC,MAAMC,KAAN,CAAY,MAAZ,CAAX;AACA,YAAMF,KAAKG,GAAL,CAAS,EAAEP,QAAF,EAAYC,QAAZ,EAAsBC,KAAtB,EAA6BC,KAA7B,EAAT,CAAN;AAFyD;AAG1D;;AAED,SAAaK,IAAb,CAAkB,EAAEC,MAAF,EAAUC,KAAV,EAAlB,EAAqC;AAAA;AACnC,UAAIN,OAAOC,MAAMC,KAAN,CAAY,MAAZ,CAAX;AACA,UAAIK,QAAQ,MAAMP,KAAKM,KAAL,CAAWD,MAAX,EAAmBC,KAAnB,EAA0BE,MAA1B,EAAlB;AACA,UAAIC,QAAQ,MAAMT,KAAKU,KAAL,EAAlB;AACA,aAAO,EAAEH,KAAF,EAASE,KAAT,EAAP;AAJmC;AAKpC;;AAED,SAAaE,GAAb,CAAiB,EAAEC,EAAF,EAAjB,EAAyB;AAAA;AACvB,UAAIA,EAAJ,EAAQ;AACN,YAAIZ,OAAO,MAAMC,MAAMC,KAAN,CAAY,MAAZ,EAAoBW,KAApB,CAA0B,EAAED,EAAF,EAA1B,EAAkCE,IAAlC,EAAjB;AACA,YAAIb,MAAMc,OAAN,CAAcf,IAAd,CAAJ,EAAyB,OAAO,IAAP;AACzB,eAAOA,IAAP;AACD;AACD,aAAO,IAAP;AANuB;AAOxB;;AAED,SAAagB,MAAb,OAAuC;AAAA,QAAnB,EAAEJ,EAAF,EAAmB;AAAA,QAAVK,MAAU;;AAAA;AACrC,UAAIL,EAAJ,EAAQ;AACN,YAAIZ,OAAO,MAAMC,MAAMC,KAAN,CAAY,MAAZ,EAAoBW,KAApB,CAA0B,EAAED,EAAF,EAA1B,EAAkCI,MAAlC,CAAyCC,MAAzC,CAAjB;AACD;;AAED,aAAO,KAAP;AALqC;AAMtC;;AAED,SAAaC,MAAb,CAAoB,EAAEN,EAAF,EAApB,EAA4B;AAAA;AAC1B,UAAIA,EAAJ,EAAQ;AACN,cAAMX,MAAMC,KAAN,CAAY,MAAZ,EAAoBW,KAApB,CAA0B,EAAED,EAAF,EAA1B,EAAkCM,MAAlC,EAAN;AACA,eAAO,IAAP;AACD;AACD,aAAO,KAAP;AAL0B;AAM3B;;AAED;;;AAGA,SAAaC,aAAb,CAA2B,EAAEP,EAAF,EAAMf,QAAN,EAA3B,EAA6C;AAAA;AAC3C,YAAMI,MAAMC,KAAN,CAAY,MAAZ,EAAoBW,KAApB,CAA0B,EAAED,EAAF,EAA1B,EAAkCI,MAAlC,CAAyC,EAAEnB,QAAF,EAAzC,CAAN;AACA,aAAO,IAAP;AAF2C;AAG5C;AA5CoB,CAAvB",
+    "file": "../../src/service/UsersService.js",
+    "sourcesContent": [
+        "module.exports = class {\n  static async userAdd({ username, password, email, phone }) {\n    let user = think.model('user');\n    await user.add({ username, password, email, phone });\n  }\n\n  static async gets({ offset, limit }) {\n    let user = think.model('user');\n    let items = await user.limit(offset, limit).select();\n    let total = await user.count();\n    return { items, total };\n  }\n\n  static async get({ id }) {\n    if (id) {\n      let user = await think.model('user').where({ id }).find();\n      if (think.isEmpty(user)) return null;\n      return user;\n    }\n    return null;\n  }\n\n  static async update({ id, ...params }) {\n    if (id) {\n      let user = await think.model('user').where({ id }).update(params);\n    }\n\n    return false;\n  }\n\n  static async delete({ id }) {\n    if (id) {\n      await think.model('user').where({ id }).delete();\n      return true;\n    }\n    return false;\n  }\n\n  /**\n   * 重置密码  管理员权限 不用校验老密码\n   */\n  static async resetPassword({ id, password }) {\n    await think.model('user').where({ id }).update({ password });\n    return true;\n  }\n}"
+    ]
+}

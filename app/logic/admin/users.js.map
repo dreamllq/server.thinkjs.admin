@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/logic/admin/users.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Logic",
+        "addAction",
+        "isMethod",
+        "fail"
+    ],
+    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzCC,cAAY;AACV,QAAG,CAAC,KAAKC,QAAL,CAAc,MAAd,CAAJ,EAA0B;AACxB,WAAKC,IAAL,CAAU,IAAV,EAAgB,QAAhB;AACA,aAAO,KAAP;AACD;AACF;AANwC,CAA3C",
+    "file": "../../../src/logic/admin/users.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Logic {\n  addAction() {\n    if(!this.isMethod('post')){\n      this.fail(5003, '请求方法错误');\n      return false;\n    }\n  }\n};\n"
+    ]
+}
