@@ -71,7 +71,7 @@ module.exports = class extends think.Controller {
     })();
   }
 
-  resetPassword() {
+  resetPasswordAction() {
     var _this6 = this;
 
     return _asyncToGenerator(function* () {

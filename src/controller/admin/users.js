@@ -45,7 +45,7 @@ module.exports = class extends think.Controller {
     }
   }
 
-  async resetPassword() {
+  async resetPasswordAction() {
     let { id, password } = this.post();
     let flag = await UsersService.resetPassword({ id, password });
     if (flag) {
