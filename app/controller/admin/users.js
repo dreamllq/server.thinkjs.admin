@@ -11,7 +11,7 @@ module.exports = class extends think.Controller {
     return _asyncToGenerator(function* () {
       console.log(_this.post());
       let { username, password, email, phone } = _this.post();
-      yield UsersService.userAdd({ username, password, email, phone });
+      yield UsersService.add({ username, password, email, phone });
       _this.success();
     })();
   }

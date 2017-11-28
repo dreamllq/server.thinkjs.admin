@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/admin/resource.js"
+    ],
+    "names": [
+        "ResourceService",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "addAction",
+        "parent",
+        "name",
+        "key",
+        "post",
+        "add",
+        "success",
+        "getsAction",
+        "resources",
+        "gets",
+        "getAction",
+        "id",
+        "query",
+        "resource",
+        "get",
+        "fail",
+        "updateAction",
+        "flag",
+        "update",
+        "deleteAction",
+        "delete"
+    ],
+    "mappings": ";;AAAA,MAAMA,kBAAkBC,QAAQ,+BAAR,CAAxB;;AAEAC,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACxCC,WAAN,GAAkB;AAAA;;AAAA;AAChB,UAAI,EAAEC,MAAF,EAAUC,IAAV,EAAgBC,GAAhB,KAAwB,MAAKC,IAAL,EAA5B;AACA,YAAMV,gBAAgBW,GAAhB,CAAoB,EAAEJ,MAAF,EAAUC,IAAV,EAAgBC,GAAhB,EAApB,CAAN;AACA,YAAKG,OAAL;AAHgB;AAIjB;;AAEKC,YAAN,GAAmB;AAAA;;AAAA;AACjB,UAAIC,YAAY,MAAMd,gBAAgBe,IAAhB,EAAtB;AACA,aAAKH,OAAL,CAAaE,SAAb;AAFiB;AAGlB;;AAEKE,WAAN,GAAkB;AAAA;;AAAA;AAChB,UAAI,EAAEC,EAAF,EAAMR,GAAN,KAAc,OAAKS,KAAL,EAAlB;AACA,UAAIC,WAAW,MAAMnB,gBAAgBoB,GAAhB,CAAoB,EAAEH,EAAF,EAAMR,GAAN,EAApB,CAArB;AACA,UAAIU,QAAJ,EAAc;AACZ,eAAKP,OAAL,CAAaO,QAAb;AACD,OAFD,MAEO;AACL,eAAKE,IAAL,CAAU,IAAV,EAAgB,OAAhB;AACD;AAPe;AAQjB;;AAEKC,cAAN,GAAqB;AAAA;;AAAA;AACnB,UAAI,EAAEL,EAAF,EAAMR,GAAN,EAAWD,IAAX,KAAoB,OAAKE,IAAL,EAAxB;AACA,UAAIa,OAAO,MAAMvB,gBAAgBwB,MAAhB,CAAuB,EAAEP,EAAF,EAAMR,GAAN,EAAWD,IAAX,EAAvB,CAAjB;AACA,UAAIe,IAAJ,EAAU;AACR,eAAKX,OAAL;AACD,OAFD,MAEO;AACL,eAAKS,IAAL,CAAU,IAAV,EAAgB,QAAhB;AACD;AAPkB;AAQpB;;AAEKI,cAAN,GAAqB;AAAA;;AAAA;AACnB,UAAI,EAAER,EAAF,KAAS,OAAKP,IAAL,EAAb;AACA,UAAIa,OAAO,MAAMvB,gBAAgB0B,MAAhB,CAAuB,EAAET,EAAF,EAAvB,CAAjB;AACA,UAAIM,IAAJ,EAAU;AACR,eAAKX,OAAL;AACD,OAFD,MAEO;AACL,eAAKS,IAAL,CAAU,IAAV,EAAgB,QAAhB;AACD;AAPkB;AAQpB;AAxC6C,CAAhD",
+    "file": "../../../src/controller/admin/resource.js",
+    "sourcesContent": [
+        "const ResourceService = require('../../service/ResourceService')\n\nmodule.exports = class extends think.Controller {\n  async addAction() {\n    let { parent, name, key } = this.post();\n    await ResourceService.add({ parent, name, key });\n    this.success();\n  }\n\n  async getsAction() {\n    let resources = await ResourceService.gets();\n    this.success(resources);\n  }\n\n  async getAction() {\n    let { id, key } = this.query();\n    let resource = await ResourceService.get({ id, key });\n    if (resource) {\n      this.success(resource);\n    } else {\n      this.fail(1201, '资源不存在');\n    }\n  }\n\n  async updateAction() {\n    let { id, key, name } = this.post();\n    let flag = await ResourceService.update({ id, key, name });\n    if (flag) {\n      this.success();\n    } else {\n      this.fail(1203, '资源更新失败');\n    }\n  }\n\n  async deleteAction() {\n    let { id } = this.post();\n    let flag = await ResourceService.delete({ id });\n    if (flag) {\n      this.success();\n    } else {\n      this.fail(1202, '资源删除失败');\n    }\n  }\n}"
+    ]
+}

@@ -4,7 +4,7 @@ module.exports = class extends think.Controller {
   async addAction() {
     console.log(this.post());
     let { username, password, email, phone } = this.post();
-    await UsersService.userAdd({ username, password, email, phone });
+    await UsersService.add({ username, password, email, phone });
     this.success();
   }
 

@@ -1,0 +1,31 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/service/ResourceService.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "add",
+        "parent",
+        "name",
+        "key",
+        "think",
+        "model",
+        "gets",
+        "select",
+        "get",
+        "id",
+        "resource",
+        "where",
+        "find",
+        "update",
+        "params",
+        "delete"
+    ],
+    "mappings": ";;;;AAAAA,OAAOC,OAAP,GAAiB,MAAM;AACrB,SAAaC,GAAb,CAAiB,EAAEC,MAAF,EAAUC,IAAV,EAAgBC,GAAhB,EAAjB,EAAwC;AAAA;AACtC,YAAMC,MAAMC,KAAN,CAAY,UAAZ,EAAwBL,GAAxB,CAA4B,EAAEC,MAAF,EAAUC,IAAV,EAAgBC,GAAhB,EAA5B,CAAN;AADsC;AAEvC;;AAED,SAAaG,IAAb,GAAoB;AAAA;AAClB,YAAMF,MAAMC,KAAN,CAAY,UAAZ,EAAwBE,MAAxB,EAAN;AADkB;AAEnB;;AAED,SAAaC,GAAb,CAAiB,EAAEC,EAAF,EAAMN,GAAN,EAAjB,EAA8B;AAAA;AAC5B,UAAIM,EAAJ,EAAQ;AACN,YAAIC,WAAWN,MAAMC,KAAN,CAAY,UAAZ,EAAwBM,KAAxB,CAA8B,EAAEF,EAAF,EAA9B,EAAsCG,IAAtC,EAAf;AACA,YAAIF,QAAJ,EAAc,OAAOA,QAAP;AACd,eAAO,IAAP;AACD,OAJD,MAIO,IAAIP,GAAJ,EAAS;AACd,YAAIO,WAAWN,MAAMC,KAAN,CAAY,UAAZ,EAAwBM,KAAxB,CAA8B,EAAER,GAAF,EAA9B,EAAuCS,IAAvC,EAAf;AACA,YAAIF,QAAJ,EAAc,OAAOA,QAAP;AACd,eAAO,IAAP;AACD;AACD,aAAO,IAAP;AAV4B;AAW7B;;AAED,SAAaG,MAAb,OAAuC;AAAA,QAAnB,EAAEJ,EAAF,EAAmB;AAAA,QAAVK,MAAU;;AAAA;AACrC,UAAIL,EAAJ,EAAQ;AACN,cAAML,MAAMC,KAAN,CAAY,UAAZ,EAAwBM,KAAxB,CAA8B,EAAEF,EAAF,EAA9B,EAAsCI,MAAtC,CAA6CC,MAA7C,CAAN;AACA,eAAO,IAAP;AACD;AACD,aAAO,KAAP;AALqC;AAMtC;;AAED,SAAaC,MAAb,CAAoB,EAAEN,EAAF,EAApB,EAA4B;AAAA;AAC1B,UAAIA,EAAJ,EAAQ;AACN,cAAML,MAAMC,KAAN,CAAY,UAAZ,EAAwBM,KAAxB,CAA8B,EAAEF,EAAF,EAA9B,EAAsCM,MAAtC,EAAN;AACA,eAAO,IAAP;AACD;AACD,aAAO,KAAP;AAL0B;AAM3B;AApCoB,CAAvB",
+    "file": "../../src/service/ResourceService.js",
+    "sourcesContent": [
+        "module.exports = class {\n  static async add({ parent, name, key }) {\n    await think.model('resource').add({ parent, name, key });\n  }\n\n  static async gets() {\n    await think.model('resource').select();\n  }\n\n  static async get({ id, key }) {\n    if (id) {\n      let resource = think.model('resource').where({ id }).find();\n      if (resource) return resource;\n      return null;\n    } else if (key) {\n      let resource = think.model('resource').where({ key }).find();\n      if (resource) return resource;\n      return null;\n    }\n    return null;\n  }\n\n  static async update({ id, ...params }) {\n    if (id) {\n      await think.model('resource').where({ id }).update(params);\n      return true;\n    }\n    return false;\n  }\n\n  static async delete({ id }) {\n    if (id) {\n      await think.model('resource').where({ id }).delete();\n      return true;\n    }\n    return false;\n  }\n}"
+    ]
+}

@@ -1,5 +1,5 @@
 module.exports = class {
-  static async userAdd({ username, password, email, phone }) {
+  static async add({ username, password, email, phone }) {
     let user = think.model('user');
     await user.add({ username, password, email, phone });
   }
@@ -23,8 +23,8 @@ module.exports = class {
   static async update({ id, ...params }) {
     if (id) {
       let user = await think.model('user').where({ id }).update(params);
+      return true;
     }
-
     return false;
   }
 

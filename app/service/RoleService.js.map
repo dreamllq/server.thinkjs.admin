@@ -1,0 +1,34 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/service/RoleService.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "add",
+        "name",
+        "key",
+        "role",
+        "think",
+        "model",
+        "gets",
+        "offset",
+        "limit",
+        "items",
+        "select",
+        "total",
+        "count",
+        "get",
+        "id",
+        "where",
+        "find",
+        "isEmpty",
+        "delete"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,MAAM;AACrB,SAAaC,GAAb,CAAiB,EAAEC,IAAF,EAAQC,GAAR,EAAjB,EAAgC;AAAA;AAC9B,UAAIC,OAAOC,MAAMC,KAAN,CAAY,MAAZ,CAAX;AACA,YAAMF,KAAKH,GAAL,CAAS,EAAEC,IAAF,EAAQC,GAAR,EAAT,CAAN;AAF8B;AAG/B;;AAED,SAAaI,IAAb,CAAkB,EAAEC,MAAF,EAAUC,KAAV,EAAlB,EAAqC;AAAA;AACnC,UAAIL,OAAOC,MAAMC,KAAN,CAAY,MAAZ,CAAX;AACA,UAAII,QAAQ,MAAMN,KAAKK,KAAL,CAAWD,MAAX,EAAmBC,KAAnB,EAA0BE,MAA1B,EAAlB;AACA,UAAIC,QAAQ,MAAMR,KAAKS,KAAL,EAAlB;AACA,aAAO,EAAEH,KAAF,EAASE,KAAT,EAAP;AAJmC;AAKpC;;AAED,SAAaE,GAAb,CAAiB,EAAEC,EAAF,EAAMZ,GAAN,EAAjB,EAA8B;AAAA;AAC5B,UAAIY,EAAJ,EAAQ;AACN,YAAIX,OAAO,MAAMC,MAAMC,KAAN,CAAY,MAAZ,EAAoBU,KAApB,CAA0B,EAAED,EAAF,EAA1B,EAAkCE,IAAlC,EAAjB;AACA,YAAIZ,MAAMa,OAAN,CAAcd,IAAd,CAAJ,EAAyB,OAAO,IAAP;AACzB,eAAOA,IAAP;AACD,OAJD,MAIO,IAAID,GAAJ,EAAS;AACd,YAAIC,OAAO,MAAMC,MAAMC,KAAN,CAAY,MAAZ,EAAoBU,KAApB,CAA0B,EAAEb,GAAF,EAA1B,EAAmCc,IAAnC,EAAjB;AACA,YAAIZ,MAAMa,OAAN,CAAcd,IAAd,CAAJ,EAAyB,OAAO,IAAP;AACzB,eAAOA,IAAP;AACD;AACD,aAAO,IAAP;AAV4B;AAW7B;;AAED,SAAae,MAAb,CAAoB,EAAEJ,EAAF,EAApB,EAA4B;AAAA;AAC1B,UAAIA,EAAJ,EAAQ;AACN,cAAMV,MAAMC,KAAN,CAAY,MAAZ,EAAoBU,KAApB,CAA0B,EAAED,EAAF,EAA1B,EAAkCI,MAAlC,EAAN;AACA,eAAO,IAAP;AACD;AACD,aAAO,KAAP;AAL0B;AAM3B;AAhCoB,CAAvB",
+    "file": "../../src/service/RoleService.js",
+    "sourcesContent": [
+        "module.exports = class {\n  static async add({ name, key }) {\n    let role = think.model('role');\n    await role.add({ name, key });\n  }\n\n  static async gets({ offset, limit }) {\n    let role = think.model('role');\n    let items = await role.limit(offset, limit).select();\n    let total = await role.count();\n    return { items, total };\n  }\n\n  static async get({ id, key }) {\n    if (id) {\n      let role = await think.model('role').where({ id }).find();\n      if (think.isEmpty(role)) return null;\n      return role;\n    } else if (key) {\n      let role = await think.model('role').where({ key }).find();\n      if (think.isEmpty(role)) return null;\n      return role;\n    }\n    return null;\n  }\n\n  static async delete({ id }) {\n    if (id) {\n      await think.model('role').where({ id }).delete();\n      return true;\n    }\n    return false;\n  }\n}"
+    ]
+}

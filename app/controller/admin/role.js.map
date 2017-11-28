@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/admin/role.js"
+    ],
+    "names": [
+        "RoleService",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "addAction",
+        "name",
+        "key",
+        "post",
+        "add",
+        "success",
+        "getsAction",
+        "offset",
+        "limit",
+        "query",
+        "items",
+        "total",
+        "gets",
+        "getAction",
+        "id",
+        "role",
+        "get",
+        "fail",
+        "deleteAction",
+        "flag",
+        "delete"
+    ],
+    "mappings": ";;AAAA,MAAMA,cAAcC,QAAQ,2BAAR,CAApB;;AAEAC,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACxCC,WAAN,GAAkB;AAAA;;AAAA;AAChB,UAAI,EAAEC,IAAF,EAAQC,GAAR,KAAgB,MAAKC,IAAL,EAApB;AACA,YAAMT,YAAYU,GAAZ,CAAgB,EAAEH,IAAF,EAAQC,GAAR,EAAhB,CAAN;AACA,YAAKG,OAAL;AAHgB;AAIjB;;AAEKC,YAAN,GAAmB;AAAA;;AAAA;AACjB,UAAI,EAAEC,MAAF,EAAUC,KAAV,KAAoB,OAAKC,KAAL,EAAxB;AACA,UAAI,EAAEC,KAAF,EAASC,KAAT,KAAmB,MAAMjB,YAAYkB,IAAZ,CAAiB,EAAEL,MAAF,EAAUC,KAAV,EAAjB,CAA7B;AACA,aAAKH,OAAL,CAAa,EAAEK,KAAF,EAASC,KAAT,EAAb;AAHiB;AAIlB;;AAEKE,WAAN,GAAkB;AAAA;;AAAA;AAChB,UAAI,EAAEC,EAAF,EAAMZ,GAAN,KAAc,OAAKO,KAAL,EAAlB;AACA,UAAIM,OAAO,MAAMrB,YAAYsB,GAAZ,CAAgB,EAAEF,EAAF,EAAMZ,GAAN,EAAhB,CAAjB;AACA,UAAIa,IAAJ,EAAU;AACR,eAAKV,OAAL,CAAaU,IAAb;AACD,OAFD,MAEO;AACL,eAAKE,IAAL,CAAU,IAAV,EAAgB,OAAhB;AACD;AAPe;AAQjB;;AAEKC,cAAN,GAAqB;AAAA;;AAAA;AACnB,UAAI,EAAEJ,EAAF,KAAS,OAAKX,IAAL,EAAb;AACA,UAAIgB,OAAO,MAAMzB,YAAY0B,MAAZ,CAAmB,EAAEN,EAAF,EAAnB,CAAjB;AACA,UAAIK,IAAJ,EAAU;AACR,eAAKd,OAAL;AACD,OAFD,MAEO;AACL,eAAKY,IAAL,CAAU,IAAV,EAAgB,MAAhB;AACD;AAPkB;AAQpB;AA/B6C,CAAhD",
+    "file": "../../../src/controller/admin/role.js",
+    "sourcesContent": [
+        "const RoleService = require('../../service/RoleService')\n\nmodule.exports = class extends think.Controller {\n  async addAction() {\n    let { name, key } = this.post();\n    await RoleService.add({ name, key });\n    this.success();\n  }\n\n  async getsAction() {\n    let { offset, limit } = this.query();\n    let { items, total } = await RoleService.gets({ offset, limit });\n    this.success({ items, total });\n  }\n\n  async getAction() {\n    let { id, key } = this.query();\n    let role = await RoleService.get({ id, key });\n    if (role) {\n      this.success(role);\n    } else {\n      this.fail(1101, '角色不存在');\n    }\n  }\n\n  async deleteAction() {\n    let { id } = this.post();\n    let flag = await RoleService.delete({ id });\n    if (flag) {\n      this.success();\n    } else {\n      this.fail(1102, '删除失败');\n    }\n  }\n}"
+    ]
+}
