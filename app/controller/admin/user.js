@@ -32,7 +32,7 @@ module.exports = class extends think.Controller {
     var _this2 = this;
 
     return _asyncToGenerator(function* () {
-      let { username, password } = _this2.body || { username: 'admin', password: '123456' };
+      let { username, password } = _this2.post();
       let currentUser = SecurityService.getUser();
       let result = yield currentUser.login({ username, password });
       if (!result) {
@@ -55,6 +55,16 @@ module.exports = class extends think.Controller {
     })();
   }
 
-  logoutAction() {}
+  logoutAction() {
+    this.cookie('_t', null, {
+      domain: '',
+      path: '/'
+    });
+    this.cookie('_q', null, {
+      domain: '',
+      path: '/'
+    });
+    this.success();
+  }
 };
 //# sourceMappingURL=user.js.map

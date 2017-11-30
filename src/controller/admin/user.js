@@ -23,7 +23,7 @@ module.exports = class extends think.Controller {
   }
 
   async loginAction() {
-    let { username, password } = this.body || { username: 'admin', password: '123456' };
+    let { username, password } = this.post();
     let currentUser = SecurityService.getUser();
     let result = await currentUser.login({ username, password });
     if (!result) {
@@ -46,6 +46,14 @@ module.exports = class extends think.Controller {
   }
 
   logoutAction() {
-
+    this.cookie('_t', null, {
+      domain: '',
+      path: '/',
+    });
+    this.cookie('_q', null, {
+      domain: '',
+      path: '/',
+    });
+    this.success();
   }
 };
